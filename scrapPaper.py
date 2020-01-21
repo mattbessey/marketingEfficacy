@@ -1,5 +1,6 @@
-all_columns
-[   
+import numpy as np
+
+all_columns = [   
     'swid',
     'swid_holdout',
     'accountid',
@@ -93,8 +94,7 @@ all_columns
     'days_since_last_stream'
 ]
 
-columns_to_drop
-[   
+drop_columns = [   
     'swid',
     'swid_holdout',
     'accountid',
@@ -147,87 +147,7 @@ columns_to_drop
     'total_stream_time_connected_tv_ms_l28',
     'total_stream_time_unknown_ms_l1',
     'total_stream_time_unknown_ms_l28',
-    'last_stream_date',
-    'account_profile_total_stream_days_l7',
-    'account_profile_total_stream_days_itd',
-    'total_stream_time_unknown_ms_l7',
-    'total_stream_time_unknown_ms_itd',
+    'days_since_last_stream'
 ]
 
-columns_after_drop
-[
-    'first_account_subscription_signup_date',
-    'last_account_subscription_signup_date', 
-    'is_entitled',
-    'total_login_days_l7', 
-    'total_login_days_itd', 
-    'total_streams_l7',
-    'total_streams_itd', 
-    'num_streaming_profiles_l7',
-    'num_streaming_profiles_itd', 
-    'num_general_streaming_profiles_l7',
-    'num_general_streaming_profiles_itd', 
-    'num_kids_streaming_profiles_l7',
-    'num_kids_streaming_profiles_itd', 
-    'num_streaming_devices_l7',
-    'num_streaming_devices_itd', 
-    'account_total_stream_days_l7',
-    'account_total_stream_days_itd',
-    'total_stream_days_general_profiles_l7',
-    'total_stream_days_general_profiles_itd',
-    'total_stream_days_kids_profiles_l7',
-    'total_stream_days_kids_profiles_itd', 
-    'total_stream_time_ms_l7',
-    'total_stream_time_ms_itd', 
-    'total_stream_time_general_profiles_ms_l7',
-    'total_stream_time_general_profiles_ms_itd',
-    'total_stream_time_kids_profiles_ms_l7',
-    'total_stream_time_kids_profiles_ms_itd', 
-    'total_stream_time_web_ms_l7',
-    'total_stream_time_web_ms_itd', 
-    'total_stream_time_mobile_ms_l7',
-    'total_stream_time_mobile_ms_itd',
-    'total_stream_time_connected_tv_ms_l7',
-    'total_stream_time_connected_tv_ms_itd', 
-    'days_since_last_stream',
-    'marketing_holdout'
-]
-
-renamed_columns
-[
-    'first_signup_date',
-    'last_signup_date', 
-    'is_entitled',
-    'ttl_login_days_l7', 
-    'ttl_login_days_itd', 
-    'ttl_streams_l7',
-    'ttl_streams_itd', 
-    'streaming_profiles_l7',
-    'streaming_profiles_itd', 
-    'general_streaming_profiles_l7',
-    'general_streaming_profiles_itd', 
-    'kids_streaming_profiles_l7',
-    'kids_streaming_profiles_itd', 
-    'streaming_devices_l7',
-    'streaming_devices_itd', 
-    'ttl_stream_days_l7',
-    'ttl_stream_days_itd',
-    'ttl_stream_days_general_profiles_l7',
-    'ttl_stream_days_general_profiles_itd',
-    'ttl_stream_days_kids_profiles_l7',
-    'ttl_stream_days_kids_profiles_itd', 
-    'ttl_stream_time_ms_l7',
-    'ttl_stream_time_ms_itd', 
-    'ttl_stream_time_general_profiles_ms_l7',
-    'ttl_stream_time_general_profiles_ms_itd',
-    'ttl_stream_time_kids_profiles_ms_l7',
-    'ttl_stream_time_kids_profiles_ms_itd', 
-    'ttl_stream_time_web_ms_l7',
-    'ttl_stream_time_web_ms_itd', 
-    'ttl_stream_time_mobile_ms_l7',
-    'ttl_stream_time_mobile_ms_itd',
-    'ttl_stream_time_connected_tv_ms_l7',
-    'tl_stream_time_connected_tv_ms_itd', 
-    'days_since_last_stream',
-    'marketing_holdout'
-]
+print(np.setdiff1d(all_columns,drop_columns))
