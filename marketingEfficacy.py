@@ -45,9 +45,9 @@ ctx = snowflake.connector.connect(authenticator='externalbrowser',
 
 # set date parameters for query
 
-subscription_start_date_min = "'2019-12-01'"
-subscription_start_date_max = "'2019-12-15'" # max of subscription start date
-engagement_date = "'2020-01-20'" # date for which we want to pull engagement behaviors
+subscription_start_date_min = "2019-12-15"
+subscription_start_date_max = "2019-12-30" # max of subscription start date
+engagement_date = "2020-01-23" # date for which we want to pull engagement behaviors
 
 
 # In[39]:
@@ -61,9 +61,9 @@ o.swid
 from account a
 join oneid_combined o on a.swid = o.swid
 join "DSS_PROD"."DISNEY_PLUS"."DIM_DISNEY_DAILY_ACCOUNT_ENGAGEMENT" e on a.accountid = e.account_id
-where e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE >= {}
-and e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE <= {}
-and e.ds = {}
+where e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE >= '{}'
+and e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE <= '{}'
+and e.ds = '{}'
 and e.is_pre_launch != 1
 limit 500000;
 """.format(subscription_start_date_min, subscription_start_date_max, engagement_date)
@@ -242,7 +242,8 @@ for i in test_columns:
 
 
 # In[57]:
+filename = "output_" + subscription_start_date_min + "_" + subscription_start_date_max + ".csv"
 
-w = csv.writer(open("output.csv", "w"))
+w = csv.writer(open(filename, "w"))
 for key, val in p_values.items():
     w.writerow([key, val[0],val[1]])
