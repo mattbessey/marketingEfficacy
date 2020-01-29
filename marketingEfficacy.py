@@ -225,25 +225,27 @@ test_columns = [
 
 
 
-p_values = {}
+p_values = pd.DataFrame(columns=['p','diff','marketing_mean','holdout_mean'])
 
 for i in test_columns:
     try: 
         p1 = stats.ttest_ind(marketing[i], holdout[i])[1]
         descr1 = marketing[i]
         try:
-            ratio = (marketing[i].mean()/holdout[i].mean()-1)*100
+            diff = (marketing[i].mean()/holdout[i].mean()-1)*100
+            marketing_mean = marketing[i].mean()
+            holdout_mean = holdout[i].mean()
         except (ZeroDivisionError):
-            ratio = "Undefined"
+            diff = "Undefined"
+            marketing_mean = "Undefined"
+            holdout_mean = "Undefined"
     except (TypeError,RuntimeWarning): 
         p1 = "Broke!"
-    p_values[i] = [p1,ratio]
+    mydict = {'name':i,'p':p1,'diff':diff,'marketing_mean':marketing_mean,'holdout_mean':holdout_mean}
+    series = pd.Series(mydict)
+    p_values = p_values.append(mydict,ignore_index=True)
     #print("Completed",i)
 
-
+p_values = p_values.set_index('name')
 # In[57]:
-filename = "output_" + subscription_start_date_min + "_" + subscription_start_date_max + ".csv"
-
-w = csv.writer(open(filename, "w"))
-for key, val in p_values.items():
-    w.writerow([key, val[0],val[1]])
+p_values.to_csv('output_test.csv')
