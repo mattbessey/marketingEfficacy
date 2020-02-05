@@ -45,10 +45,10 @@ ctx = snowflake.connector.connect(authenticator='externalbrowser',
 
 # set date parameters for query
 
-subscription_start_date_min = "2019-12-01"
+subscription_start_date_min = "2019-12-15"
 subscription_start_date_max = "2019-12-30" # max of subscription start date
-engagement_date = "2020-01-23" # date for which we want to pull engagement behaviors
-sample_size = 1000000
+engagement_date = "2020-02-02" # date for which we want to pull engagement behaviors
+sample_size = 2000000
 
 
 # In[39]:
