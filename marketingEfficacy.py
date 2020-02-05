@@ -45,9 +45,10 @@ ctx = snowflake.connector.connect(authenticator='externalbrowser',
 
 # set date parameters for query
 
-subscription_start_date_min = "2019-12-15"
+subscription_start_date_min = "2019-12-01"
 subscription_start_date_max = "2019-12-30" # max of subscription start date
 engagement_date = "2020-01-23" # date for which we want to pull engagement behaviors
+sample_size = 1000000
 
 
 # In[39]:
@@ -58,15 +59,15 @@ select
 o.swid
 , o.swid_holdout
 , e.*
-from account a
+from "DSS_PROD"."DSS"."SFMC_ACCOUNT_SWID_MAP" a
 join oneid_combined o on a.swid = o.swid
-join "DSS_PROD"."DISNEY_PLUS"."DIM_DISNEY_DAILY_ACCOUNT_ENGAGEMENT" e on a.accountid = e.account_id
+join "DSS_PROD"."DISNEY_PLUS"."DIM_DISNEY_DAILY_ACCOUNT_ENGAGEMENT" e on a.account_id = e.account_id
 where e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE >= '{}'
 and e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE <= '{}'
 and e.ds = '{}'
 and e.is_pre_launch != 1
-limit 500000;
-""".format(subscription_start_date_min, subscription_start_date_max, engagement_date)
+limit {};
+""".format(subscription_start_date_min, subscription_start_date_max, engagement_date, sample_size)
 
 
 # In[41]:
@@ -248,4 +249,7 @@ for i in test_columns:
 
 p_values = p_values.set_index('name')
 # In[57]:
-p_values.to_csv('output_test.csv')
+
+filename = "output_" + subscription_start_date_min + "_" + subscription_start_date_max + "_" + str(sample_size) + ".csv"
+
+p_values.to_csv(filename)
