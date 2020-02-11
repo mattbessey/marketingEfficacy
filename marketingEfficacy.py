@@ -45,9 +45,9 @@ ctx = snowflake.connector.connect(authenticator='externalbrowser',
 
 # set date parameters for query
 
-subscription_start_date_min = "'2019-12-01'"
-subscription_start_date_max = "'2019-12-30'" # max of subscription start date
-engagement_date = "'2020-02-07'" # date for which we want to pull engagement behaviors
+subscription_start_date_min = "2019-12-01"
+subscription_start_date_max = "2019-12-30" # max of subscription start date
+engagement_date = "2020-02-08" # date for which we want to pull engagement behaviors
 sample_size = 2000000
 
 
@@ -62,11 +62,11 @@ o.swid
 from "DSS_PROD"."DSS"."SFMC_ACCOUNT_SWID_MAP" a
 join oneid_combined o on a.swid = o.swid
 join "DSS_PROD"."DISNEY_PLUS"."DIM_DISNEY_DAILY_ACCOUNT_ENGAGEMENT" e on a.account_id = e.account_id
-where e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE >= {}
-and e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE <= {}
-and e.ds = {}
+where e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE >= '{}'
+and e.LAST_ACCOUNT_SUBSCRIPTION_SIGNUP_DATE <= '{}'
+and e.ds = '{}'
 and e.is_pre_launch != 1
-limit 1000000;
+limit {};
 """.format(subscription_start_date_min, subscription_start_date_max, engagement_date, sample_size)
 
 
